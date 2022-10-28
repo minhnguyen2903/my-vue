@@ -10,6 +10,7 @@ import {
 	faChevronDown,
 	faChevronUp,
 	faBars,
+	faListUl,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -19,7 +20,8 @@ library.add(
 	faGauge,
 	faChevronDown,
 	faChevronUp,
-	faBars
+	faBars,
+	faListUl
 );
 
 import App from '@/App.vue';

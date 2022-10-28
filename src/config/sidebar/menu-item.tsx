@@ -7,29 +7,27 @@ const menuItem: MenuItem = {
 		{
 			name: 'Dashboard',
 			type: 'item',
-			path: '/dashboard',
+			icon: 'fa-gauge',
+			// path: '/dashboard',
 		},
 		{
 			name: 'User',
 			type: 'collapse',
+			icon: 'fa-users',
 			children: [
 				{
 					name: 'List',
-					type: 'collapse',
-					// path: '/user/list',
-					children: [
-						{
-							name: 'List Child',
-							type: 'item',
-							path: '/user/list/child',
-						},
-					],
+					icon: 'fa-list-ul',
+					type: 'item',
+					path: '/user/list',
 				},
 			],
+			path: '/',
 		},
 		{
 			name: 'Setting',
 			type: 'item',
+			icon: 'fa-gear',
 			path: '/setting',
 		},
 	],

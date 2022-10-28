@@ -10,7 +10,7 @@ defineProps<{
 <template>
 	<li>
 		<p class="sidebar-item-start">
-			<font-awesome-icon icon="fa-solid fa-gauge" />
+			<font-awesome-icon :icon="`fa-solid ${item.icon}`" />
 			<router-link v-if="item.path" :to="item.path">{{
 				item.name
 			}}</router-link>
@@ -80,6 +80,6 @@ a {
 }
 
 .end-icon {
-	transition: 0.2s;
+	transition: 0.1s;
 }
 </style>
