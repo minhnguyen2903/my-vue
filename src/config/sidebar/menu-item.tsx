@@ -1,32 +1,32 @@
 import type { MenuItem } from '@/types/Sidebar';
+import { MenuItemType } from '@/types/Sidebar';
 
 const menuItem: MenuItem = {
 	name: 'Application',
-	type: 'group',
+	type: MenuItemType.group,
 	children: [
 		{
 			name: 'Dashboard',
-			type: 'item',
+			type: MenuItemType.item,
 			icon: 'fa-gauge',
-			// path: '/dashboard',
+			path: '/dashboard',
 		},
 		{
 			name: 'User',
-			type: 'collapse',
+			type: MenuItemType.collapse,
 			icon: 'fa-users',
 			children: [
 				{
 					name: 'List',
 					icon: 'fa-list-ul',
-					type: 'item',
+					type: MenuItemType.item,
 					path: '/user/list',
 				},
 			],
-			path: '/',
 		},
 		{
 			name: 'Setting',
-			type: 'item',
+			type: MenuItemType.item,
 			icon: 'fa-gear',
 			path: '/setting',
 		},

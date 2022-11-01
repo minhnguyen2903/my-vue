@@ -1,7 +1,18 @@
 export interface MenuItem {
 	name: string;
-	type: 'group' | 'collapse' | 'item';
-	path?: MenuItem['type'] extends 'group' ? null : Partial<string>;
+	type: MenuItemType;
+	path?: string;
 	icon?: string;
-	children?: MenuItem['type'] extends 'item' ? null : MenuItem[];
+	children?: MenuItem[];
+}
+
+export interface SidebarStore {
+	open: boolean;
+	active: Array<string>;
+}
+
+export enum MenuItemType {
+	group = 'group',
+	collapse = 'collapse',
+	item = 'item',
 }

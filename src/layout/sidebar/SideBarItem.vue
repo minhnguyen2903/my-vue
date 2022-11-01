@@ -1,25 +1,39 @@
 <script setup lang="ts">
-import { defineProps, onMounted } from 'vue';
+import { defineProps, ref, watch } from 'vue';
 import type { MenuItem } from '@/types/Sidebar';
+import router from '@/router';
+import { useRoute } from 'vue-router';
+import { useSidebarStore } from '@/stores/sidebar';
+
 defineProps<{
 	item: MenuItem;
-	collapse?: boolean;
+	expand?: boolean;
 }>();
+
+const { sidebar } = useSidebarStore();
+const sidebarRef = ref(sidebar);
+
+const navigate = (to: string | undefined) => {
+	to && router.push(to);
+};
 </script>
 
 <template>
-	<li>
+	<li
+		@click="navigate(item.path)"
+		:class="{
+			sidebarActive:
+				sidebarRef.active.includes(item.name.toLocaleLowerCase()) || expand,
+		}"
+	>
 		<p class="sidebar-item-start">
 			<font-awesome-icon :icon="`fa-solid ${item.icon}`" />
-			<router-link v-if="item.path" :to="item.path">{{
-				item.name
-			}}</router-link>
-			<span v-else>{{ item.name }}</span>
+			<span>{{ item.name }}</span>
 		</p>
 		<p
 			v-if="item.type === 'collapse'"
 			class="end-icon"
-			:class="{ endIconRevert: !collapse }"
+			:class="{ endIconRevert: expand }"
 		>
 			<font-awesome-icon icon="fa-solid fa-chevron-down" />
 		</p>
@@ -30,9 +44,10 @@ defineProps<{
 li {
 	user-select: none;
 	list-style-type: none;
-	padding: 14px 16px;
+	padding: 0 16px;
+	height: 50px;
 	color: rgb(255, 255, 255);
-	border-radius: 8px;
+	border-radius: 3px;
 	margin-bottom: 12px;
 	box-sizing: border-box;
 	text-transform: capitalize;
@@ -40,18 +55,19 @@ li {
 	cursor: pointer;
 	display: flex;
 	justify-content: space-between;
+	overflow: hidden;
 }
 
-li.active {
+li.sidebarActive {
 	background: rgb(255, 255, 255);
-	box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+	/* box-shadow: 0px 0px 4px 0px rgb(255, 255, 255); */
 	color: #121120;
 	font-weight: 500;
 }
 
 li:hover {
 	background: rgb(255, 255, 255);
-	box-shadow: 0px 0px 4px 0px rgb(255, 255, 255);
+	/* box-shadow: 0px 0px 4px 0px rgb(255, 255, 255); */
 	color: #121120;
 	transition: 0.1s;
 }
@@ -70,16 +86,29 @@ li svg {
 	overflow: hidden;
 }
 
+.sidebar-item-start span {
+	line-height: 1.5em;
+	display: block;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;
 }
 
-.endIconRevert {
+.end-icon {
+	transition: 0.1s;
+	margin-left: 4px;
+	display: flex;
+	align-items: center;
+}
+
+.end-icon.endIconRevert {
 	transform: rotate(180deg);
 }
 
-.end-icon {
-	transition: 0.1s;
+svg {
+	width: 20px;
+	height: 20px;
 }
 </style>

@@ -10,7 +10,7 @@
 .main-page {
 	padding: 10px;
 	height: calc(100vh - 80px);
-	width: calc(100vw - 300px);
+	width: 100%;
 	overflow: auto;
 	box-sizing: border-box;
 }

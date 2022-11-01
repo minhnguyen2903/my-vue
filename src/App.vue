@@ -1,8 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView, useRoute } from 'vue-router';
 import MainPageVue from '@/components/MainPage.vue';
 import SideBarContainer from '@/layout/sidebar/SideBarContainer.vue';
 import HeaderContainer from '@/layout/header/HeaderContainer.vue';
+import { watch, onMounted } from 'vue';
+import { useSidebarStore } from './stores/sidebar';
+
+const route = useRoute();
+const { sidebar } = useSidebarStore();
+onMounted(() => {
+	watch(route, (prevRoute, nextRoute) => {
+		sidebar.active = nextRoute.path.split('/').filter((path) => !!path);
+	});
+});
 </script>
 
 <template>
@@ -21,7 +31,10 @@ import HeaderContainer from '@/layout/header/HeaderContainer.vue';
 
 <style scoped>
 #container-grid {
-	display: grid;
-	grid-template-columns: 300px auto;
+	display: flex;
+}
+
+#section-right {
+	flex-grow: 1;
 }
 </style>

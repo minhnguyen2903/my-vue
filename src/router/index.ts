@@ -20,8 +20,8 @@ const router = createRouter({
 			component: () => import('@/views/DashboardView.vue'),
 		},
 		{
-			path: '/user',
-			name: 'about',
+			path: '/user/list',
+			name: 'user-list',
 			// route level code-splitting
 			// this generates a separate chunk (About.[hash].js) for this route
 			// which is lazy-loaded when the route is visited.

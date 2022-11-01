@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import menu from '@/config/sidebar/menu';
+import { useSidebarStore } from '@/stores/sidebar';
 import SideBarMenuMedial from './SideBarMenuMedial.vue';
+
+const { sidebar } = useSidebarStore();
 </script>
 
 <template>
 	<div v-for="group in menu" :key="group.name">
-		<div class="group-divider">
+		<div class="group-divider" :class="{ groupDividerCollapse: !sidebar.open }">
 			<span>{{ group.name.trim() }}</span>
 		</div>
 		<ul v-if="group.children">
@@ -41,6 +44,10 @@ ul {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.group-divider.groupDividerCollapse {
+	visibility: hidden;
 }
 
 .group-divider > span {
